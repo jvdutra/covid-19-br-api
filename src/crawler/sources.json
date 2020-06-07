@@ -1,0 +1,251 @@
+[
+    {
+        "uf": "AC",
+        "url": "https://agencia.ac.gov.br/wp-content/uploads/{YEAR}/{MONTH}/BOLETIM_COVID-19_ACRE_{DAY}_{MONTH}_{YEAR}.pdf",
+        "type": "pdf"
+    },
+    {
+        "uf": "AL",
+        "url": "http://www.alagoascontraocoronavirus.al.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#inicio > div > div:nth-child(3) > div:nth-child(1) > div > h2",
+            "deaths": "#inicio > div > div:nth-child(3) > div:nth-child(4) > div > h2",
+            "recovered": "#inicio > div > div:nth-child(3) > div:nth-child(3) > div > h2"
+        }
+    },
+    {
+        "uf": "AM",
+        "url": "https://public.tableau.com/profile/astec.sass#!/vizhome/PainelCOVID-19Resumo/PainelCovid-19Resumo",
+        "type": "tableau"
+    },
+    {
+        "uf": "AP",
+        "url": "https://www.portal.ap.gov.br/coronavirus",
+        "type": null
+    },
+    {
+        "uf": "BA",
+        "url": "http://www.saude.ba.gov.br/wp-content/uploads/{YEAR}/{MONTH}/BOLETIM_ELETRONICO_BAHIAN_{LAST_NUMBER}___{DAY}{MONTH}{YEAR}.pdf",
+        "type": "pdf"
+    },
+    {
+        "uf": "CE",
+        "url": "https://indicadores.integrasus.saude.ce.gov.br/indicadores/indicadores-coronavirus/coronavirus-ceara",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "body > int-root > int-situacao-coronavirus-ceara > div > div > div:nth-child(2) > int-situacao-coronavirus-ceara-geral > mat-card > mat-card-content > int-number-card > ngx-charts-number-card > ngx-charts-chart > div > svg > g > g > g:nth-child(4) > g > text",
+            "deaths": "body > int-root > int-situacao-coronavirus-ceara > div > div > div:nth-child(2) > int-situacao-coronavirus-ceara-geral > mat-card > mat-card-content > int-number-card > ngx-charts-number-card > ngx-charts-chart > div > svg > g > g > g:nth-child(5) > g > text",
+            "recovered": "body > int-root > int-situacao-coronavirus-ceara > div > div > div:nth-child(2) > int-situacao-coronavirus-ceara-geral > mat-card > mat-card-content > int-number-card > ngx-charts-number-card > ngx-charts-chart > div > svg > g > g > g:nth-child(7) > g > text"
+        }
+    },
+    {
+        "uf": "DF",
+        "url": "http://www.coronavirus.df.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#casos > div.container > div > div > div.col-md-4.casos-card.card-blue > h4",
+            "deaths": "#casos > div.container > div > div > div.col-md-4.casos-card.card-red > h4",
+            "recovered": "#casos > div.container > div > div > div.col-md-4.casos-card.card-green > h4"
+        }
+    },
+    {
+        "uf": "ES",
+        "url": "https://coronavirus.es.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(1) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
+            "deaths": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(3) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
+            "recovered": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(2) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p"
+        }
+    },
+    {
+        "uf": "GO",
+        "url": "https://www.saude.go.gov.br/coronavirus",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#indicadores-covid > div > div:nth-child(3) > div.col-4.indicador-value",
+            "deaths": "#indicadores-covid > div > div:nth-child(5) > div.col-4.indicador-value",
+            "recovered": null
+        }
+    },
+    {
+        "uf": "MA",
+        "url": "http://www.saude.ma.gov.br/",
+        "type": "scrapable",
+        "property": "data-value",
+        "scraping": {
+            "confirmed": "#counter_module__8ee5226dc74ff0528b7bec9bd50f4136",
+            "deaths": "#counter_module__2fdd58e1af2010d6910036f0396cf861",
+            "recovered": "#counter_module__f81c835e663bd469f487e59a175720bc"
+        }
+    },
+    {
+        "uf": "MS",
+        "url": "http://mais.saude.ms.gov.br/sense/app/51c38346-b65d-4f3e-8a80-5111a7a9da76/sheet/5e240ee9-701c-4b0b-b053-6608f341bc9d/state/analysis",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#grid > div:nth-child(21) > div.object-and-panel-wrapper > div > div.cell-content.qv-object-wrapper.ng-scope.ng-isolate-scope > article > div.qv-inner-object.no-titles > div > div > div > div.kpi-data > div.value-wrapper.center > div > div > div.kpi-value > div > span",
+            "deaths": "#grid > div:nth-child(23) > div.object-and-panel-wrapper > div > div.cell-content.qv-object-wrapper.ng-scope.ng-isolate-scope > article > div.qv-inner-object.no-titles > div > div > div > div.kpi-data > div.value-wrapper.center > div > div > div.kpi-value > div > span",
+            "recovered": null
+        }
+    },
+    {
+        "uf": "MT",
+        "url": "http://saude.mt.gov.br/",
+        "type": null
+    },
+    {
+        "uf": "PA",
+        "url": "https://www.covid-19.pa.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#q-app > div > div > div.col.items-center.header-background > div.col.items-center.q-pt-xl > div > div > div > div > div.row.q-col-gutter-md.justify-center.q-mt-sm > div:nth-child(1) > div > div > span.text-h3.text-weight-bolder.text-center",
+            "deaths": "#q-app > div > div > div.col.items-center.header-background > div.col.items-center.q-pt-xl > div > div > div > div > div.row.q-col-gutter-md.justify-center.q-mt-sm > div:nth-child(5) > div > div > span.text-h3.text-weight-bolder.text-center",
+            "recovered": "#q-app > div > div > div.col.items-center.header-background > div.col.items-center.q-pt-xl > div > div > div > div > div.row.q-col-gutter-md.justify-center.q-mt-sm > div:nth-child(4) > div > div > span.text-h3.text-weight-bolder"
+        }
+    },
+    {
+        "uf": "PB",
+        "url": "https://superset.plataformatarget.com.br/superset/dashboard/55/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#chart-id-723 > div > div",
+            "deaths": "#chart-id-721 > div > div",
+            "recovered": null
+        }
+    },
+    {
+        "uf": "PE",
+        "url": "https://www.pecontracoronavirus.pe.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "body > div.elementor.elementor-13.dce-elementor-post-13 > div > div > section.elementor-element.elementor-element-6d6415a.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > section.elementor-element.elementor-element-e23fe5a.elementor-section-full_width.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-inner-section > div > div > div.elementor-element.elementor-element-a3b3e7d.elementor-column.elementor-col-33.elementor-inner-column > div > div > div.elementor-element.elementor-element-e1a73e8.elementor-widget.elementor-widget-heading > div > h2",
+            "deaths": "body > div.elementor.elementor-13.dce-elementor-post-13 > div > div > section.elementor-element.elementor-element-6d6415a.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > section.elementor-element.elementor-element-e23fe5a.elementor-section-full_width.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-inner-section > div > div > div.elementor-element.elementor-element-51a40ff.elementor-column.elementor-col-33.elementor-inner-column > div > div > div.elementor-element.elementor-element-9db7570.elementor-widget.elementor-widget-heading > div > h2",
+            "recovered": "body > div.elementor.elementor-13.dce-elementor-post-13 > div > div > section.elementor-element.elementor-element-6d6415a.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > section.elementor-element.elementor-element-e23fe5a.elementor-section-full_width.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-inner-section > div > div > div.elementor-element.elementor-element-76c9e97.elementor-column.elementor-col-33.elementor-inner-column > div > div > div.elementor-element.elementor-element-26959e9.elementor-widget.elementor-widget-heading > div > h2"
+        }
+    },
+    {
+        "uf": "PI",
+        "url": "http://coronavirus.pi.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "body > div.content.home__content > div.stats > div.container.stats__container > div.stats__outros > div.stats__box.stats__municipios > div.stats__body > table > tbody > tr:nth-child(168) > td.stats__confirmados",
+            "deaths": "body > div.content.home__content > div.stats > div.container.stats__container > div.stats__outros > div.stats__box.stats__municipios > div.stats__body > table > tbody > tr:nth-child(168) > td.stats__obitos",
+            "recovered": "#estado-recuperados"
+        }
+    },
+    {
+        "uf": "PR",
+        "url": "http://www.saude.pr.gov.br/sites/default/arquivos_restritos/files/documento/{YEAR}-{MONTH}/informe_epidemiologico_{DAY}_{MONTH}_{YEAR}.csv",
+        "type": "csv",
+        "finder": {
+            "separator": ";",
+            "searchFor": ";;Fora do PR;",
+            "linesUp": 2
+        }
+    },
+    {
+        "uf": "RJ",
+        "url": "http://painel.saude.rj.gov.br/monitoramento/covid19.html",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#\\*lK36\\*kKA2E4AB844FAB2FB1DA14F5A5C8D55FC1\\*x1\\*t1591493595530 > div > div.scroll-container.mstrmojo-scrollNode > div > div > div.metric-value.label",
+            "deaths": "#\\*lK36\\*kKC2C79FCB4305B42BA1B507A0EBD2481C\\*x1\\*t1591493595530 > div > div.scroll-container.mstrmojo-scrollNode > div > div > div.metric-value.label",
+            "recovered": "#\\*lK36\\*kW0A2B080DD055429381E03223F63329B5\\*x1\\*t1591493595530 > div > div.scroll-container.mstrmojo-scrollNode > div > div > div.metric-value.label"
+        }
+    },
+    {
+        "uf": "RN",
+        "url": "https://covid.lais.ufrn.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#casos-confirmados > div.inner > p.value",
+            "deaths": "#obitos > div.inner > p.value",
+            "recovered": "#curados > div.inner > p.value"
+        }
+    },
+    {
+        "uf": "RO",
+        "url": "http://covid19.sesau.ro.gov.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "body > div > div > div > div > div.col-lg-3.col-md-12.col-sm-12 > div > div.card-body > div:nth-child(1) > div > button",
+            "deaths": "#j_idt15\\:j_idt21_data > tr.ui-datatable-summaryrow.ui-widget-header > td:nth-child(6)",
+            "recovered": "body > div > div > div > div > div.col-lg-3.col-md-12.col-sm-12 > div > div.card-body > div:nth-child(2) > div > button"
+        }
+    },
+    {
+        "uf": "RR",
+        "url": "https://roraimacontraocorona.rr.gov.br/winner/public/mapa.xhtml",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#j_idt15\\:j_idt21_data > tr.ui-datatable-summaryrow.ui-widget-header > td:nth-child(2)",
+            "deaths": "body > div > div > div > div > div.col-lg-3.col-md-12.col-sm-12 > div > div.card-body > div:nth-child(3) > div > button",
+            "recovered": "#j_idt15\\:j_idt21_data > tr.ui-datatable-summaryrow.ui-widget-header > td:nth-child(3)"
+        }
+    },
+    {
+        "uf": "RS",
+        "url": "http://ti.saude.rs.gov.br/covid19/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#content > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div:nth-child(1) > div.h5.mb-0.font-weight-bold.text-gray-800",
+            "deaths": "#content > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(1) > div.h5.mb-0.font-weight-bold.text-gray-800",
+            "recovered": "#content > div > div:nth-child(2) > div:nth-child(3) > div > div > div > div:nth-child(1) > div.h5.mb-0.font-weight-bold.text-gray-800"
+        }
+    },
+    {
+        "uf": "SC",
+        "url": "http://www.coronavirus.sc.gov.br/wp-content/uploads/{YEAR}/{MONTH}/boletim-epidemiologico-{DAY}-{MONTH}-{YEAR}.pdf",
+        "type": "pdf"
+    },
+    {
+        "uf": "SE",
+        "url": "https://todoscontraocorona.net.br/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#recipiente-dados > div > div.fusion-layout-column.fusion_builder_column.fusion_builder_column_1_4.fusion-builder-column-5.fusion-one-fourth.fusion-column-first.\\31 _4 > div > div.fusion-title.title.fusion-title-2.fusion-sep-none.fusion-title-center.fusion-title-text.fusion-title-size-three.fusion-border-below-title > h3",
+            "deaths": "#recipiente-dados > div > div.fusion-layout-column.fusion_builder_column.fusion_builder_column_1_4.fusion-builder-column-8.fusion-one-fourth.fusion-column-last.\\31 _4 > div > div.fusion-title.title.fusion-title-5.fusion-sep-none.fusion-title-center.fusion-title-text.fusion-title-size-three.fusion-border-below-title > h3",
+            "recovered": "#recipiente-dados > div > div.fusion-layout-column.fusion_builder_column.fusion_builder_column_1_4.fusion-builder-column-6.fusion-one-fourth.\\31 _4 > div > div.fusion-title.title.fusion-title-3.fusion-sep-none.fusion-title-center.fusion-title-text.fusion-title-size-three.fusion-border-below-title > h3"
+        }
+    },
+    {
+        "uf": "SP",
+        "url": "https://www.saopaulo.sp.gov.br/coronavirus/",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "body > section.planosp.quadro-informacoes-home > div > div > div:nth-child(1) > div.texto-quadro-protocolo.num-quadro-home > div:nth-child(1) > p.pnumeros-home",
+            "deaths": "body > section.planosp.quadro-informacoes-home > div > div > div:nth-child(1) > div.texto-quadro-protocolo.num-quadro-home > div:nth-child(3) > p.pnumeros-home",
+            "recovered": null
+        }
+    },
+    {
+        "uf": "TO",
+        "url": "http://integra.saude.to.gov.br/covid19",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#corona-casos-confirmados-to-kpi",
+            "deaths": "#corona-obitos-to-kpi",
+            "recovered": null
+        }
+    }
+]
