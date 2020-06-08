@@ -8,6 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 
-app.listen(3333, () => {
-    console.log(`API is successfuly loaded!`);
+app.listen(3333 || process.env.PORT, () => {
+    console.log(`[Success] API is successfuly loaded!`);
 });
