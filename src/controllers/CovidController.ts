@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import moment from 'moment';
+import { tz } from 'moment-timezone';
 
 import knex from '../database/connection';
 import sources from '../scrapper/sources.json';
 
 class CovidController {
     async index(request: Request, response: Response) {
-        const currentDay = moment().format('YYYY-MM-DD HH:mm:ss');
+        const currentDay = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss');
 
         const total = await knex('data')
         .where('created', '<=', currentDay)
