@@ -9,7 +9,6 @@
     "build": "tsc -p .",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
-  "type": "module",
   "keywords": [],
   "author": "jvdutra",
   "license": "MIT",
