@@ -41,6 +41,8 @@ const calculateTotalData = async () => {
 
   await trx('data').insert(totalData);
   await trx.commit();
+
+  console.log(`[SUCCESS] Total number inserted!`);
 }
 
 const crawlData = async () => {
@@ -103,6 +105,8 @@ const crawlData = async () => {
     }
 
     await browser.close();
+
+    console.log(`[SUCCESS] Scrap of states concluded!`);
 
     return calculateTotalData();
 }
