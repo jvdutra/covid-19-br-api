@@ -9,7 +9,7 @@ A API estará funcionando em breve, e eu irei desenvolver mais funcionalidades, 
 
 Note que o objetivo deste projeto não é desenvolver algo profissional ou pronto para produção.
 
-###### * Nem todos, na verdade. Apenas 15 dos 26 estados fornecem sites com os dados públicos, veja-os em ``scrapper/sources.json``.
+###### * Nem todos, na verdade. Apenas 15 dos 26 estados fornecem sites com os dados públicos, veja-os em ``src/scrapper/sources.json``.
 
 ## Servidor de desenvolvimento
 

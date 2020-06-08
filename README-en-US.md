@@ -9,7 +9,7 @@ This API will be running soon and I'll develop more features, like filtering for
 
 Please note that the focus of this project is not to develop a professional or production-ready application.
 
-###### * Not every. Currently, only 15 of 26 states have working source websites, you can see them by navigating to ``scrapper/sources.json``.
+###### * Not every. Currently, only 15 of 26 states have working source websites, you can see them by navigating to ``src/scrapper/sources.json``.
 
 ## Development server
 
