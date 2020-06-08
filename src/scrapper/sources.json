@@ -70,13 +70,13 @@
     },
     {
         "uf": "MA",
-        "url": "http://www.saude.ma.gov.br/",
+        "url": "https://www.corona.ma.gov.br/",
         "type": "scrapable",
-        "property": "data-value",
+        "property": "text",
         "scraping": {
-            "confirmed": "#main > div.container > div.post_type_exist.clearfix > div.vc_row.wpb_row.vc_row-fluid.stm_fixed_background.vc_custom_1585871592005.vc_row-has-fill.vc_general.vc_parallax.vc_parallax-content-moving > div.wpb_column.vc_column_container.vc_col-sm-12 > div > div > div.vc_row.wpb_row.vc_inner.vc_row-fluid.vc_custom_1436163882282 > div:nth-child(2) > div > div > div",
-            "deaths": "#main > div.container > div.post_type_exist.clearfix > div.vc_row.wpb_row.vc_row-fluid.stm_fixed_background.vc_custom_1585871592005.vc_row-has-fill.vc_general.vc_parallax.vc_parallax-content-moving > div.wpb_column.vc_column_container.vc_col-sm-12 > div > div > div.vc_row.wpb_row.vc_inner.vc_row-fluid.vc_custom_1436163882282 > div:nth-child(3) > div > div > div",
-            "recovered": "#main > div.container > div.post_type_exist.clearfix > div.vc_row.wpb_row.vc_row-fluid.stm_fixed_background.vc_custom_1585871592005.vc_row-has-fill.vc_general.vc_parallax.vc_parallax-content-moving > div.wpb_column.vc_column_container.vc_col-sm-12 > div > div > div.vc_row.wpb_row.vc_inner.vc_row-fluid.vc_custom_1436163882282 > div:nth-child(5) > div > div > div"
+            "confirmed": "#estado-confirmados",
+            "deaths": "#estado-obitos",
+            "recovered": "#estado-recuperados"
         }
     },
     {
