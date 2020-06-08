@@ -37,7 +37,7 @@ const calculateTotalData = async () => {
     confirmed: Number(confirmed),
     deaths: Number(deaths),
     recovered: Number(recovered),
-    created: moment().tz('America/Sao_Paulo').format("YYYY-MM-DD HH:mm:ss")
+    created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
   }
 
   await trx('data').insert(totalData);
@@ -69,37 +69,29 @@ const crawlData = async () => {
 
         await page.goto(s.url, { waitUntil: 'networkidle0' });
         const content = await page.content();
+        await page.close();
+
         const $ = cheerio.load(content);
 
-        let data;
-
-        if(s.property === 'text') {
-          data = {
-            confirmed: $(s.scraping?.confirmed).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-            deaths: $(s.scraping?.deaths).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-            recovered: $(s.scraping?.recovered).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0]
-          }
-        } else {
-          data = {
-            confirmed: $(s.scraping?.confirmed).attr('data-value')?.trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-            deaths: $(s.scraping?.deaths).attr('data-value')?.trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-            recovered: $(s.scraping?.recovered).attr('data-value')?.trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0]
-          }
+        const data = {
+          confirmed: $(s.scraping?.confirmed).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
+          deaths: $(s.scraping?.deaths).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
+          recovered: $(s.scraping?.recovered).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0]
         }
-  
+
         const parsedData = {
           uf: s.uf,
           confirmed: (data.confirmed && String(data.confirmed) != '0') ? Number(data.confirmed?.replace(/\./g, '')) : null,
           deaths: (data.deaths && String(data.confirmed) != '0') ? Number(data.deaths?.replace(/\./g, '')) : null,
           recovered: (data.recovered && String(data.confirmed) != '0') ? Number(data.recovered?.replace(/\./g, '')) : null,
-          created: moment().tz('America/Sao_Paulo').format("YYYY-MM-DD HH:mm:ss")
+          created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
         }
 
         const trx = await knex.transaction();
         await trx('data').insert(parsedData);
         await trx.commit();
 
-        await page.close();
+
       } catch (error) {
         console.log(`Erro [${s.uf}]: ${error.message}`);
       }
