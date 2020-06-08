@@ -5,7 +5,7 @@ const routes = express.Router();
 
 const covidController = new CovidController();
 
-routes.get('/covid', covidController.index);
-routes.get('/covid/:uf', covidController.show);
+routes.get('/get', covidController.index);
+routes.get('/get/:uf', covidController.show);
 
 export default routes;
