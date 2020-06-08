@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/server.ts",
+    "start": "ts-node dist/src/server.js",
+    "build": "tsc -p .",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "keywords": [],
