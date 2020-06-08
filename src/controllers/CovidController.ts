@@ -9,13 +9,13 @@ class CovidController {
         const currentDay = moment().format('YYYY-MM-DD HH:mm:ss');
 
         const total = await knex('data')
-        .where('created', '>=', currentDay)
+        .where('created', '<=', currentDay)
         .andWhere('uf', '=', 'BR')
         .select('confirmed', 'deaths', 'recovered', 'created')
         .first();
 
         const states = await knex('data')
-        .where('created', '>=', currentDay)
+        .where('created', '<=', currentDay)
         .andWhere('uf', '!=', 'BR')
         .select('uf', 'confirmed', 'deaths', 'recovered', 'created');
 

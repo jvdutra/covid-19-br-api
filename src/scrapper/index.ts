@@ -25,7 +25,7 @@ const calculateTotalData = async () => {
   .sum({ deaths: 'deaths' })
   .sum({ confirmed: 'confirmed' })
   .sum({ recovered: 'recovered' })
-  .where('created', '>=', currentDay)
+  .where('created', '=', currentDay)
   .first()
   .then((row) => row);
 
