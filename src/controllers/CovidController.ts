@@ -1,12 +1,59 @@
 import { Request, Response } from 'express';
+import moment from 'moment';
+
+import knex from '../database/connection';
+import sources from '../scrapper/sources.json';
 
 class CovidController {
-    index(request: Request, response: Response) {
-        return {};
+    async index(request: Request, response: Response) {
+        const currentDay = moment().format('YYYY-MM-DD HH:mm:ss');
+
+        const total = await knex('data')
+        .where('created', '>=', currentDay)
+        .andWhere('uf', '=', 'BR')
+        .select('confirmed', 'deaths', 'recovered', 'created')
+        .first();
+
+        const states = await knex('data')
+        .where('created', '>=', currentDay)
+        .andWhere('uf', '!=', 'BR')
+        .select('uf', 'confirmed', 'deaths', 'recovered', 'created');
+
+        const parsedData = {
+            total,
+            states
+        }
+
+        return response.json(parsedData);
     }
 
-    show(request: Request, response: Response) {
-        return {};
+    async show(request: Request, response: Response) {
+        const { uf } = request.params;
+
+        const validUfs = sources.map(s => s.uf);
+
+        if(!validUfs.includes(uf)) {
+            return response.status(400).json({
+                status: 400,
+                type: 'error',
+                message: 'UF entered is not valid'
+            });
+        }
+
+        const total = await knex('data')
+        .where('uf', '=', uf)
+        .select('confirmed', 'deaths', 'recovered', 'created')
+        .orderBy('created', 'desc');
+
+        if(!total.length) {
+            return response.status(404).json({
+                status: 404,
+                type: 'error',
+                message: 'This UF does not have records registered'
+            });
+        }
+
+        return response.json(total);
     }
 }
 
