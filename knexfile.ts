@@ -2,7 +2,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
 
-module.exports = {
+export default {
     client: 'mysql2',
     connection: {
         host : process.env.DB_HOST,
@@ -14,4 +14,4 @@ module.exports = {
         directory: path.resolve(__dirname, 'src', 'database', 'migrations')
     },
     useNullAsDefault: true
-};
+}
