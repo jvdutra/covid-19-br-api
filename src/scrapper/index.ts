@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 import moment from 'moment';
+import { tz } from 'moment-timezone';
 
 import knex from '../database/connection';
 import sources from './sources.json'; 
@@ -18,7 +19,7 @@ interface ScrapableSource {
 }
 
 const calculateTotalData = async () => {
-  const currentDay = moment().format('YYYY-MM-DD HH:mm:ss');
+  const currentDay = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss');
   const trx = await knex.transaction();
 
   const sumData = await trx('data')
@@ -36,7 +37,7 @@ const calculateTotalData = async () => {
     confirmed: Number(confirmed),
     deaths: Number(deaths),
     recovered: Number(recovered),
-    created: moment().utc().format("YYYY-MM-DD HH:mm:ss")
+    created: moment().tz('America/Sao_Paulo').format("YYYY-MM-DD HH:mm:ss")
   }
 
   await trx('data').insert(totalData);
@@ -91,7 +92,7 @@ const crawlData = async () => {
           confirmed: (data.confirmed && String(data.confirmed) != '0') ? Number(data.confirmed?.replace(/\./g, '')) : null,
           deaths: (data.deaths && String(data.confirmed) != '0') ? Number(data.deaths?.replace(/\./g, '')) : null,
           recovered: (data.recovered && String(data.confirmed) != '0') ? Number(data.recovered?.replace(/\./g, '')) : null,
-          created: moment().utc().format("YYYY-MM-DD HH:mm:ss")
+          created: moment().tz('America/Sao_Paulo').format("YYYY-MM-DD HH:mm:ss")
         }
 
         const trx = await knex.transaction();
