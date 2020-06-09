@@ -3,7 +3,7 @@
 
 Ao governo federal mudar seus métodos para divulgar os números da Covid-19 no Brasil, fiz esta API que efetua um web scrapping nas estatísticas do coronavírus nos sites da Secretaria de Saúde de cada* estado.
 
-Por padrão, o scrap acontece todos os dias às 22:00 (horário de Brasília).
+Por padrão, o scrap acontece todos os dias às 22:00 (horário de Brasília) e os dados são salvos em um banco de dados MySQL.
 
 Algumas funcionalidades serão desenvolvidas em breve, como a filtragem de resultados.
 
