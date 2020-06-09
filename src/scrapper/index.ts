@@ -1,10 +1,17 @@
 import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 import moment from 'moment';
+import axios from 'axios';
 import { tz } from 'moment-timezone';
 
 import knex from '../database/connection';
 import sources from './sources.json'; 
+
+interface ApiSource {
+  uf: string,
+  url: string,
+  type?: any
+}
 
 interface ScrapableSource {
   uf: string,
@@ -18,37 +25,121 @@ interface ScrapableSource {
   }
 }
 
-const calculateTotalData = async () => {
-  const currentDay = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss');
-  const trx = await knex.transaction();
+interface InsertedData {
+  uf: string,
+  confirmed: number,
+  deaths: number,
+  recovered: number
+}
 
-  const sumData = await trx('data')
-  .sum({ deaths: 'deaths' })
-  .sum({ confirmed: 'confirmed' })
-  .sum({ recovered: 'recovered' })
-  .where('created', '=', currentDay)
-  .first()
-  .then((row) => row);
+const getData = async () => {
+  const scrapableSources: ScrapableSource[] = sources.filter(s => s.type === 'scrapable');
+  const apiSources: ApiSource[] = sources.filter(s => s.type === 'api');
 
-  const { confirmed, deaths, recovered } : any = sumData;
+  const apiData = await getDataFromApi(apiSources);
+  const scrapableData = await getDataFromScrapping(scrapableSources);
 
-  const totalData = {
+  const insertedData = [...apiData, ...scrapableData ];
+
+  return calculateTotalData(insertedData);
+}
+
+const calculateTotalData = async (insertedData: InsertedData[]) => {
+  let lastSum = await knex('data')
+  .select('confirmed', 'deaths', 'recovered')
+  .where('uf', '=', 'BR')
+  .orderBy('id', 'desc')
+  .first();
+
+  if(!lastSum) {
+    lastSum = {
+      confirmed: 0,
+      deaths: 0,
+      recovered: 0
+    }
+  }
+
+  const confirmed = (insertedData
+  .map(i => i.confirmed)
+  .reduce((a, b) => a + b, 0)) + lastSum.confirmed;
+
+  const deaths = (insertedData
+  .map(i => i.deaths)
+  .reduce((a, b) => a + b, 0)) + lastSum.deaths;
+
+  const recovered = (insertedData
+  .map(i => i.recovered)
+  .reduce((a, b) => a + b, 0)) + lastSum.recovered;
+
+  const totalSum = {
     uf: 'BR',
     confirmed: Number(confirmed),
     deaths: Number(deaths),
     recovered: Number(recovered),
     created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
   }
-
-  await trx('data').insert(totalData);
+  
+  const trx = await knex.transaction();
+  await trx('data').insert(totalSum);
   await trx.commit();
 
-  console.log(`[SUCCESS] Total number inserted!`);
+  console.log(`[${moment().format('x')}] ✅ Total numbers calculated!`);
 }
 
-const crawlData = async () => {
-    const scrapableSources: ScrapableSource[] = sources.filter(s => s.type === 'scrapable');
+const getDataFromApi = async (apiSources: ApiSource[]) => {
+  console.log(`[${moment().format('x')}] 🚀 Scraping from APIs started!`);
+
+  let insertedData = new Array();
+
+  await Promise.all(apiSources.map(async s => {
+    try {
+      let data = {
+        confirmed: 0,
+        deaths: 0,
+        recovered: 0
+      }
+  
+      switch (s.uf) {
+        case 'CE':
+          const confirmed = await axios.get(`${s.url}/qtd-confirmados`).then(res => res.data[0].quantidade);
+          const deaths = await axios.get(`${s.url}/qtd-obitos`).then(res => res.data[0].quantidade);
+          const recovered = await axios.get(`${s.url}/qtd-recuperados`).then(res => res.data[0].quantidade);
+  
+          data = { confirmed, deaths, recovered };
+          break;
+        default:
+          break;
+      }
+  
+      const parsedData = {
+        uf: s.uf,
+        confirmed: data.confirmed,
+        deaths: data.deaths,
+        recovered: data.recovered,
+        created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
+      }
+  
+      insertedData.push(parsedData);
+  
+      const trx = await knex.transaction();
+      await trx('data').insert(parsedData);
+      await trx.commit();
+    } catch (error) {
+      console.log(`[${moment().format('x')}] ❌ Error of ${s.uf}: ${error}`);
+    }
+  }));
+
+  console.log(`[${moment().format('x')}] ✅ Scraping from API is concluded!`);
+
+  return insertedData;
+}
+
+const getDataFromScrapping = async (scrapableSources: ScrapableSource[]) => {
+    console.log(`[${moment().format('x')}] 🚀 Scraping from websites started!`);
+
     const browser = await puppeteer.launch({ headless: true });
+
+    let insertedData = new Array();
 
     for (let i = 0; i < scrapableSources.length; i++) {
       const s = scrapableSources[i];
@@ -73,10 +164,14 @@ const crawlData = async () => {
 
         const $ = cheerio.load(content);
 
+        const confirmed = $(s.scraping?.confirmed)[0];
+        const deaths = $(s.scraping?.deaths)[0];
+        const recovered = $(s.scraping?.recovered)[0];
+
         const data = {
-          confirmed: $(s.scraping?.confirmed).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-          deaths: $(s.scraping?.deaths).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
-          recovered: $(s.scraping?.recovered).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0]
+          confirmed: $(confirmed).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
+          deaths: $(deaths).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0],
+          recovered: $(recovered).text().trim().replace(/(\r\n|\n|\r)/gm, '').split(' ')[0]
         }
 
         const parsedData = {
@@ -87,21 +182,22 @@ const crawlData = async () => {
           created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
         }
 
+        insertedData.push(parsedData);
+
         const trx = await knex.transaction();
         await trx('data').insert(parsedData);
         await trx.commit();
 
-
       } catch (error) {
-        console.log(`Erro [${s.uf}]: ${error.message}`);
+        console.log(`[${moment().format('x')}] ❌ Error of ${s.uf}: ${error}`);
       }
     }
 
     await browser.close();
 
-    console.log(`[SUCCESS] Scrap of states concluded!`);
+    console.log(`[${moment().format('x')}] ✅ Scraping from websites is concluded!`);
 
-    return calculateTotalData();
+    return insertedData;
 }
 
-export default crawlData;
+export default getData;

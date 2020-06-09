@@ -32,8 +32,8 @@
     },
     {
         "uf": "CE",
-        "url": "https://indicadores.integrasus.saude.ce.gov.br/indicadores/indicadores-coronavirus/coronavirus-ceara",
-        "type": null
+        "url": "https://indicadores.integrasus.saude.ce.gov.br/api/coronavirus",
+        "type": "api"
     },
     {
         "uf": "DF",
@@ -52,9 +52,9 @@
         "type": "scrapable",
         "property": "text",
         "scraping": {
-            "confirmed": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(1) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
-            "deaths": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(3) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
-            "recovered": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(2) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p"
+            "confirmed": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(3) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
+            "deaths": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(2) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p",
+            "recovered": "#slider-70 > div > div.owl-stage-outer > div > div:nth-child(1) > article > div > div > div.box-content > div.box-statistic-counter.link-color-color > p"
         }
     },
     {
@@ -188,8 +188,14 @@
     },
     {
         "uf": "SC",
-        "url": "http://www.coronavirus.sc.gov.br/wp-content/uploads/{YEAR}/{MONTH}/boletim-epidemiologico-{DAY}-{MONTH}-{YEAR}.pdf",
-        "type": "pdf"
+        "url": "https://files.nsctotal.com.br/especiais/coronavirus/index.html",
+        "type": "scrapable",
+        "property": "text",
+        "scraping": {
+            "confirmed": "#qtdConfirm",
+            "deaths": "#qtdMorte",
+            "recovered": null
+        }
     },
     {
         "uf": "SE",
@@ -197,8 +203,8 @@
         "type": "scrapable",
         "property": "text",
         "scraping": {
-            "confirmed": "#tabela-distribuicao > table > tbody > tr:nth-child(77) > td:nth-child(2)",
-            "deaths": "#tabela-distribuicao > table > tbody > tr:nth-child(77) > td:nth-child(3)",
+            "confirmed": "#tabela-evolucao > table > tbody > tr:nth-child(2) > td:nth-child(2) > span > span",
+            "deaths": "#tabela-evolucao > table > tbody > tr:nth-child(4) > td:nth-child(2) > span > span",
             "recovered": "#tabela-evolucao > table > tbody > tr:nth-child(1) > td:nth-child(2) > span > span"
         }
     },
