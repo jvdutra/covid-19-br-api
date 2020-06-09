@@ -40,7 +40,7 @@ class CovidController {
         if(!validUfs.includes(uf)) {
             return response.status(400).json({
                 status: 400,
-                type: 'error',
+                type: 'error_invalid_uf',
                 message: 'UF entered is not valid'
             });
         }
@@ -53,7 +53,7 @@ class CovidController {
         if(!total.length) {
             return response.status(404).json({
                 status: 404,
-                type: 'error',
+                type: 'error_uf_is_not_registered',
                 message: 'This UF does not have records registered'
             });
         }
