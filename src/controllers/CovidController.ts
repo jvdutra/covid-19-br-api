@@ -8,17 +8,21 @@ import sources from '../scrapper/sources.json';
 class CovidController {
     async index(request: Request, response: Response) {
         const currentDay = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss');
+        const beforeDay = moment().tz('America/Sao_Paulo').subtract(1, 'days').startOf('day').format('YYYY-MM-DD HH:mm:ss');
 
         const total = await knex('data')
-        .where('created', '>=', currentDay)
+        .where('created', '>=', beforeDay)
+        .where('created', '<', currentDay)
         .andWhere('uf', '=', 'BR')
         .select('confirmed', 'deaths', 'recovered', 'created')
         .first();
 
         const states = await knex('data')
-        .where('created', '>=', currentDay)
+        .where('created', '>=', beforeDay)
+        .where('created', '<', currentDay)
         .andWhere('uf', '!=', 'BR')
-        .select('uf', 'confirmed', 'deaths', 'recovered', 'created');
+        .select('uf', 'confirmed', 'deaths', 'recovered', 'created')
+        .orderBy('uf', 'ASC');
 
         const parsedData = {
             total,
