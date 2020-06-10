@@ -2,7 +2,6 @@ import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 import moment from 'moment';
 import axios from 'axios';
-import { tz } from 'moment-timezone';
 
 import knex from '../database/connection';
 import sources from './sources.json'; 
@@ -76,7 +75,7 @@ const calculateTotalData = async (insertedData: InsertedData[]) => {
     confirmed: Number(confirmed),
     deaths: Number(deaths),
     recovered: Number(recovered),
-    created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
+    created: moment().format('YYYY-MM-DD HH:mm:ss')
   }
   
   const trx = await knex.transaction();
@@ -116,7 +115,7 @@ const getDataFromApi = async (apiSources: ApiSource[]) => {
         confirmed: data.confirmed,
         deaths: data.deaths,
         recovered: data.recovered,
-        created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
+        created: moment().format('YYYY-MM-DD HH:mm:ss')
       }
   
       insertedData.push(parsedData);
@@ -179,7 +178,7 @@ const getDataFromScrapping = async (scrapableSources: ScrapableSource[]) => {
           confirmed: (data.confirmed && String(data.confirmed) != '0') ? Number(data.confirmed?.replace(/\./g, '')) : null,
           deaths: (data.deaths && String(data.confirmed) != '0') ? Number(data.deaths?.replace(/\./g, '')) : null,
           recovered: (data.recovered && String(data.confirmed) != '0') ? Number(data.recovered?.replace(/\./g, '')) : null,
-          created: moment().tz('America/Sao_Paulo').format('YYYY-MM-DD HH:mm:ss')
+          created: moment().format('YYYY-MM-DD HH:mm:ss')
         }
 
         insertedData.push(parsedData);
