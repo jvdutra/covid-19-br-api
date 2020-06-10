@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/server.ts",
     "start": "node dist/src/server.js",
     "build": "tsc -p .",
+    "scrapper:run": "node dist/src/scrapper/run.js",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "keywords": [],

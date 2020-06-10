@@ -137,7 +137,7 @@ const getDataFromApi = async (apiSources: ApiSource[]) => {
 const getDataFromScrapping = async (scrapableSources: ScrapableSource[]) => {
     console.log(`[${moment().format('x')}] 🚀 Scraping from websites started!`);
 
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
 
     let insertedData = new Array();
 
