@@ -146,7 +146,7 @@ const getDataFromScrapping = async (scrapableSources: ScrapableSource[]) => {
       try {
         const page = await browser.newPage();
         await page.setRequestInterception(true);
-        await page.setDefaultNavigationTimeout(60000);
+        await page.setDefaultNavigationTimeout(20000);
     
         page.on('request', (req) => {
             if(req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image') {
