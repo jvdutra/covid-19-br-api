@@ -11,6 +11,7 @@ const connection = knex({
       database: process.env.DB_DATABASE,
       timezone: process.env.TZ || 'America/Sao_Paulo'
     },
+    pool: { min: 0, max: 30 },
     useNullAsDefault: true
 });
 

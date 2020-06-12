@@ -13,5 +13,6 @@ module.exports = {
     migrations: {
         directory: path.resolve(__dirname, 'src', 'database', 'migrations')
     },
+    pool: { min: 0, max: 30 },
     useNullAsDefault: true
 }
