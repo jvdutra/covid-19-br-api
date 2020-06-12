@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "node dist/src/server.js",
+    "start": "node --max_old_space_size=8000 dist/src/server.js",
     "build": "tsc -p .",
     "scrapper:run": "node --max_old_space_size=8000 dist/src/scrapper/run.js",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
