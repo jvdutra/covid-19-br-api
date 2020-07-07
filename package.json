@@ -22,7 +22,7 @@
     "moment": "^2.26.0",
     "mysql2": "^2.1.0",
     "node-schedule": "^1.3.2",
-    "npm": "^6.14.5",
+    "npm": "^6.14.6",
     "puppeteer": "^3.3.0"
   },
   "devDependencies": {
